@@ -42,6 +42,7 @@ public class AracController implements Serializable{
     
     public void delete(){
         this.getAracDao().delete(this.arac);
+        this.clear();
     }
 
     public void updateForm(Arac a){

@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="bootstrap.js" />
+
+    </h:head>
+    <h:body><div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <h:form>
+                        <ul class="navbar-nav"> 
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="personel" value="Personel"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
+                            </li>     
+                              <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="tur" value="Tur"/>
+                            </li> 
+                              <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="usta" value="Usta"/>
+                            </li> 
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="musteri" value="Musteri"/>
+                            </li> 
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="arac" value="Arac"/>
+                            </li> 
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="depo" value="Depo"/>
+                            </li> 
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="kargosirketi" value="KargoSirketi"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="siparis" value="Siparis"/>
+                            </li>
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="parca" value="Parca"/>
+                            </li>
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="tamir" value="Tamir"/>
+                            </li>
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
+                            </li>
+                        </ul>
+                    </h:form>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <h:form>
+                        <h:dataTable styleClass="table table-striped table-hover" value="#{aracController.araclist}" var="arac">
+                            <h:column >
+                                <f:facet name="header"> SASINO </f:facet> 
+                                <h:commandLink action="#{aracController.updateForm(arac)}" value=" #{arac.sasino}" />
+                                   
+                            </h:column>
+                            
+                             <h:column >
+                                <f:facet name="header"> ARAC SAHIBI </f:facet> 
+                                    #{arac.musteri.adi}
+                            </h:column>
+                            
+                           <h:column >
+                                <f:facet name="header"> PLAKA </f:facet> 
+                                    #{arac.plaka}
+                            </h:column>
+                            
+                             <h:column >
+                                <f:facet name="header"> RENK </f:facet> 
+                                    #{arac.renk}
+                            </h:column>
+                          
+                             <h:column >
+                                <f:facet name="header"> MOTORNO </f:facet> 
+                                    #{arac.motorno}
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-md-5">
+                    
+                    <h:form>
+                        <div class="form-group">
+                            <label for="selecMusteri">Arac Sahibi</label>
+                            <h:selectOneMenu styleClass="custom-select" id="selecMusteri" value="#{aracController.selectedMusteri}">
+                                <f:selectItems value="#{aracController.musteriList}" var="Musteri" itemValue="#{Musteri.musteri_id}" itemLabel="#{Musteri.adi}" />
+                            </h:selectOneMenu>
+                        </div>
+                     
+                        <div class="form-group">
+                             <label for="inputSasino">Sasino</label>
+                             <h:inputText value="#{aracController.arac.sasino}" styleClass="form-control" />
+                        </div>
+                        
+                        <div class="form-group">
+                             <label for="inputPlaka">Plaka</label>
+                             <h:inputText value="#{aracController.arac.plaka}" styleClass="form-control" />
+                        </div>
+                        
+                        <div class="form-group">
+                             <label for="inputrenk">Renk</label>
+                             <h:inputText value="#{aracController.arac.renk}" styleClass="form-control" />
+                        </div>
+                        
+                        <div class="form-group">
+                             <label for="inputMotorno">Motorno</label>
+                             <h:inputText value="#{aracController.arac.motorno}" styleClass="form-control" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <h:commandButton rendered="#{aracController.arac.sasino == null}" action="#{aracController.create}" value="Create" styleClass="btn btn-primary" />
+                            <h:commandButton rendered="#{aracController.arac.sasino != null}" action="#{aracController.delete}" value="Delete" styleClass="btn btn-danger" />
+                        </div>
+                    </h:form>
+
+                </div>
+            </div>
+
+        </div>
+    </h:body>
+</html>
+

@@ -117,6 +117,38 @@ public class DepoDao {
     
     }
     
+     public void update(Depo depo) {
+         
+         try{
+             
+             PreparedStatement pst = this.getConnection().prepareStatement("update depo set adres=? where depo_id=?");
+             pst.setString(1, depo.getAdres());
+             pst.setLong(2, depo.getDepo_id());
+             
+             pst.executeUpdate();
+             
+         }catch(SQLException ex){
+             System.err.println(ex.getMessage());
+         }
+     }
+
+    public void delete(Depo depo) {
+        
+        try{
+            
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from parca where depo_id=?");
+            pst.setLong(1, depo.getDepo_id());
+            pst.executeUpdate();
+
+            pst = this.getConnection().prepareStatement("delete from depo where depo_id=?");
+            pst.setLong(1, depo.getDepo_id());
+            pst.executeUpdate();
+            
+        }catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
+    
        public Connector getConnector() {
         if(this.connector == null)
             this.connector = new Connector();
@@ -128,6 +160,8 @@ public class DepoDao {
             this.connection = this.getConnector().connect();
         return connection;
     }
+
+   
 
     
     

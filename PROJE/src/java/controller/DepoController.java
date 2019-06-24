@@ -18,15 +18,36 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class DepoController implements Serializable{
+public class DepoController implements Serializable {
+
     private List<Depo> depolist;
     private DepoDao depoDao;
     private Depo depo;
 
-    public void create(){
-        this.getDepoDao().insert(this.depo);
+    public void clear() {
+        this.depo = new Depo();
     }
-    
+
+    public void create() {
+        this.getDepoDao().insert(this.depo);
+        this.clear();
+    }
+
+    public void updateForm(Depo d) {
+        this.depo = d;
+
+    }
+
+    public void update() {
+        this.getDepoDao().update(this.depo);
+        this.clear();
+    }
+
+    public void delete() {
+        this.getDepoDao().delete(this.depo);
+        this.clear();
+    }
+
     public List<Depo> getDepolist() {
         this.depolist = this.getDepoDao().findAll();
         return depolist;
@@ -37,8 +58,9 @@ public class DepoController implements Serializable{
     }
 
     public DepoDao getDepoDao() {
-        if(this.depoDao == null)
+        if (this.depoDao == null) {
             this.depoDao = new DepoDao();
+        }
         return depoDao;
     }
 
@@ -47,15 +69,14 @@ public class DepoController implements Serializable{
     }
 
     public Depo getDepo() {
-        if(this.depo == null)
+        if (this.depo == null) {
             this.depo = new Depo();
+        }
         return depo;
     }
 
     public void setDepo(Depo depo) {
         this.depo = depo;
     }
-    
-    
-    
+
 }

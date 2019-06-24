@@ -95,14 +95,11 @@
                                 <h:commandButton rendered="#{depoController.depo.depo_id == null}" styleClass="btn btn-primary" value="Create" action="#{depoController.create}" >
                                     <f:ajax execute="firma-form" render="firma-form firma-table" />
                                 </h:commandButton>
-                                <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-primary" value="Update" action="#{firmaController.update}" >
+                                <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-primary" value="Update" action="#{depoController.update}" >
                                     <f:ajax execute="firma-form" render="firma-form firma-table" />
                                 </h:commandButton>
-                                <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-danger" value="Delete" action="#{firmaController.delete()}" >
+                                <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-danger" value="Delete" action="#{depoController.delete()}" >
                                     <f:ajax execute="firma-form" render="firma-form firma-table" />
-                                </h:commandButton>
-                                <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{firmaController.clearForm()}" >
-                                    <f:ajax execute="@this" render="firma-form" />
                                 </h:commandButton>
                             </div>
                         </div>

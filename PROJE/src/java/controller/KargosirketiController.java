@@ -23,8 +23,29 @@ public class KargosirketiController implements Serializable{
     private KargosirketiDao kargosirketiDao;
     private Kargosirketi kargosirketi;
     
+    
+    public void clear(){
+        this.kargosirketi = new Kargosirketi();
+    }
+    
     public void create(){
         this.getKargosirketiDao().insert(this.kargosirketi);
+        this.clear();
+    }
+    
+    public void updateForm(Kargosirketi k){
+        this.kargosirketi = k;
+    }
+    
+    public void update(){
+        this.getKargosirketiDao().update(this.kargosirketi);
+        this.clear();
+        
+    }
+    
+    public void delete(){
+        this.getKargosirketiDao().delete(this.kargosirketi);
+        this.clear();
     }
 
     public List<Kargosirketi> getKargosirketilist() {

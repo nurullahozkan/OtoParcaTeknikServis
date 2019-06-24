@@ -5,9 +5,7 @@
  */
 package dao;
 
-import entity.Depo;
 import entity.Kargosirketi;
-import entity.Siparis;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -138,6 +136,39 @@ public class KargosirketiDao {
         }
     }
     
+     public void update(Kargosirketi kargosirketi) {
+
+            try{
+            
+            PreparedStatement pst = this.getConnection().prepareStatement("update kargosirketi set adi=?, telno=?  where sirket_id=?");
+            
+            pst.setString(1, kargosirketi.getAdi());
+            pst.setString(2, kargosirketi.getTelno());
+            pst.setLong(3, kargosirketi.getSirket_id());
+
+            pst.executeUpdate();
+            
+            
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+     }
+     
+      public void delete(Kargosirketi kargosirketi) {
+          
+          try{
+              
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from kargosirketi where sirket_id=?");
+            pst.setLong(1, kargosirketi.getSirket_id());
+            pst.executeUpdate();
+            
+          }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } 
+            
+            
+      }
+    
      public Connector getConnector() {
         if(this.connector == null)
             this.connector = new Connector();
@@ -149,6 +180,10 @@ public class KargosirketiDao {
             this.connection = this.getConnector().connect();
         return connection;
     }
+
+   
+
+   
 
             
         }

@@ -74,6 +74,17 @@ public class UstaAracDao {
         }
     }
     
+     public void update(UstaArac ustaarac, Long selectedArac, Long selectedUsta, Long selectedTamir) {
+
+         try{
+             
+             PreparedStatement pst = this.getConnection().prepareStatement("update ustaarac set tcno=?, tarih=?");
+     
+               }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+     }
+    
      public void delete(UstaArac ustaarac) {
          
          try{
@@ -121,7 +132,5 @@ public class UstaAracDao {
         }
         return connection;
     }
-
-   
 
 }

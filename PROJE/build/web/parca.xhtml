@@ -12,12 +12,15 @@
     </h:head>
     <h:body>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+            <nav class="navbar navbar-expand-lg navbar-collapse bg-dark"> 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
                         <ul class="navbar-nav"> 
+                             <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
+                            </li>
                             <li class="nav-item active">
-                                <h:commandLink styleClass="nav-link" action="personel" value="Personel"/>
+                                <h:commandLink styleClass="nav-link " action="personel" value="Personel"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
@@ -52,6 +55,9 @@
                              <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
+                            </li>
                         </ul>
                     </h:form>
                 </div>
@@ -66,7 +72,8 @@
                         <h:dataTable styleClass="table table-striped table-hover" value="#{parcaController.parcalist}" var="parca">
                             <h:column >
                                 <f:facet name="header"> PARCA ID </f:facet> 
-                                <h:commandLink  value="#{parca.parca_id}" />
+                                <h:commandLink action="#{parcaController.updateForm(parca)}" value=" #{parca.parca_id}" >
+                                </h:commandLink>
 
                             </h:column>
 
@@ -158,6 +165,9 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton rendered="#{parcaController.parca.parca_id == null}" action="#{parcaController.create}" value="Create" styleClass="btn btn-primary" />
+                                <h:commandButton rendered="#{parcaController.parca.parca_id != null}" action="#{parcaController.update()}" value="Update" styleClass="btn btn-primary" />
+                                <h:commandButton rendered="#{parcaController.parca.parca_id != null}" action="#{parcaController.delete()}" value="Delete" styleClass="btn btn-danger" />
+
                             </div>
                         </div>
                     </h:form>

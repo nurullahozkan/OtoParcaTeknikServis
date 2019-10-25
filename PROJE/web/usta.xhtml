@@ -12,12 +12,15 @@
     </h:head>
     <h:body>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-collapse bg-dark">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
                         <ul class="navbar-nav"> 
+                             <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
+                            </li>
                             <li class="nav-item active">
-                                <h:commandLink styleClass="nav-link" action="personel" value="Personel"/>
+                                <h:commandLink styleClass="nav-link " action="personel" value="Personel"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
@@ -52,6 +55,9 @@
                              <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
+                             <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
+                            </li>
                         </ul>
                     </h:form>
                 </div>
@@ -62,12 +68,14 @@
 
             <div class="row">
                 <div class="col-md-9">
-                    <h:form>
+                    <h:form id="usta-table">
                         <h:dataTable styleClass="table table-striped table-hover" value="#{ustaController.ustalist}" var="usta">
                             <h:column >
                                 <f:facet name="header"> TCNO </f:facet> 
-                                <h:commandLink action="#{ustaController.updateForm(usta)}" value="#{usta.tcno}" />
-
+                                <h:commandLink action="#{ustaController.updateForm(usta)}" value="#{usta.tcno}" >
+                                    <f:ajax execute="@this" render="usta-form" />
+                                </h:commandLink>
+                                               
                             </h:column>
 
                             <h:column >
@@ -105,7 +113,7 @@
                 </div>
                 <div class="col-md-3">
 
-                    <h:form>
+                    <h:form id="usta-form">
                         <div class="form-group">
                             <label for="selectFirmaAdi"> Firma Adi </label>
                             <h:selectOneMenu styleClass="custom-select" id="selectFirmaAdi" value="#{ustaController.selectedFirma}">
@@ -144,9 +152,15 @@
                         </div>
 
                         <div class="form-group">
-                            <h:commandButton rendered="#{ustaController.usta.tcno == null}" action="#{ustaController.create}" value="Create" styleClass="btn btn-primary" />
-                            <h:commandButton rendered="#{ustaController.usta.tcno != null}"  action="#{ustaController.update}" value="Update" styleClass="btn btn-dark" />
-                            <h:commandButton rendered="#{ustaController.usta.tcno != null}"  action="#{ustaController.delete}" value="Delete" styleClass="btn btn-danger" />
+                            <h:commandButton rendered="#{ustaController.usta.tcno == null}" action="#{ustaController.create}" value="Create" styleClass="btn btn-primary" >
+                                <f:ajax execute="usta-form" render="usta-form usta-table" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ustaController.usta.tcno != null}"  action="#{ustaController.update}" value="Update" styleClass="btn btn-dark" >
+                                <f:ajax execute="usta-form" render="usta-form usta-table" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ustaController.usta.tcno != null}"  action="#{ustaController.delete}" value="Delete" styleClass="btn btn-danger" >
+                                <f:ajax execute="usta-form" render="usta-form usta-table" />
+                            </h:commandButton>
                         </div>
 
                     </h:form>

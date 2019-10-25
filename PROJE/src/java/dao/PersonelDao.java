@@ -79,7 +79,21 @@ public class PersonelDao {
     }
     
     public void update(Personel personel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        try{
+           PreparedStatement pst = this.getConnection().prepareStatement("update personel set tcno = ?, adi=?, soyadi=?, adres=?  where firma_id=?");
+            
+            pst.setLong(1, personel.getTcno());
+            pst.setString(2, personel.getAdi());
+            pst.setString(3, personel.getSoyadi());
+            pst.setString(4, personel.getAdres());
+            pst.setLong(5, personel.getFirma().getFirma_id());
+
+            pst.executeUpdate();    
+            
+        }    catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     public void delete(Personel personel) {

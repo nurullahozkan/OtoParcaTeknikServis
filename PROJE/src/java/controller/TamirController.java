@@ -39,6 +39,21 @@ public class TamirController implements Serializable{
         this.getTamirDao().insert(this.tamir, selectedParca);
         this.clear();
     }
+    
+    public void updateForm(Tamir t){
+        this.tamir = t;
+        this.selectedParca = this.tamir.getParca().getParca_id();
+    }
+    
+    public void update(){
+        this.getTamirDao().update(this.tamir, selectedParca);
+        this.clear();
+    }
+    
+    public void delete(){
+        this.getTamirDao().delete(this.tamir);
+        this.clear();
+    }
 
     public Tamir getTamir() {
         if(this.tamir == null)

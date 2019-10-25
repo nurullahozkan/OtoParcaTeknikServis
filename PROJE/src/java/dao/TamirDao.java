@@ -143,4 +143,12 @@ public class TamirDao {
         return connection;
     }
 
+    public void update(Tamir tamir, Long selectedParca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void delete(Tamir tamir) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

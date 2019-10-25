@@ -54,6 +54,26 @@ public class ParcaController implements Serializable{
         this.getParcaDao().insert(this.parca, selectedFirma, selectedTur, selectedDepo, selectedSiparis);
         this.clear();
     }
+    
+    public void updateForm(Parca p){
+        this.parca = p;
+        this.selectedFirma = this.parca.getFirma().getFirma_id();
+        this.selectedFirma = this.parca.getFirma().getFirma_id();
+        this.selectedSiparis = this.parca.getSiparis().getSiparis_id();
+        this.selectedTur = this.parca.getTur().getTur_id();
+        
+    }
+    
+    public void update(){
+        this.getParcaDao().update(this.parca, selectedFirma, selectedDepo, selectedSiparis, selectedTur);
+        this.clear();
+        
+    }
+    
+    public void delete(){
+        this.parcaDao.delete(this.parca);
+        this.clear();
+    }
 
     public Parca getParca() {
         if(this.parca == null)

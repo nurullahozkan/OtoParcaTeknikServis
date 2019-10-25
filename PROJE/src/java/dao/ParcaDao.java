@@ -145,6 +145,42 @@ public class ParcaDao {
         }
 
     }
+        
+        
+    public void update(Parca parca, Long selectedFirma, Long selectedDepo, Long selectedSiparis, Long selectedTur) {
+
+        try{ 
+        
+            PreparedStatement pst = this.getConnection().prepareStatement("update parca set adi=?, adet=?, alis_fiyati=?,"
+                    + " satis_fiyati=?, firma_id=?, tur_id=?, depo_id=?, siparis_id=? where parca_id =?");
+            
+            pst.setString(1,parca.getAdi());
+            pst.setInt(2, parca.getAdet());
+            pst.setInt(3, parca.getAlis_fiyati());
+            pst.setInt(4, parca.getSatis_fiyati());
+            pst.setLong(5,parca.getFirma().getFirma_id());
+            pst.setLong(6, parca.getTur().getTur_id());
+            pst.setLong(7, parca.getDepo().getDepo_id());
+            pst.setLong(8, parca.getSiparis().getSiparis_id());
+            pst.setLong(9, parca.getParca_id());
+            
+            pst.executeUpdate();
+            
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void delete(Parca parca) {
+     
+        try{ 
+        
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from parca where parca_id=?");
+            
+            
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }    }
      
     public FirmaDao getFirmaDao() {
         if(this.firmaDao == null)
@@ -181,6 +217,5 @@ public class ParcaDao {
             this.connection = this.getConnector().connect();
         return connection;
     }
-
  
 }

@@ -24,7 +24,7 @@ public class MusteriController implements Serializable{
     private Musteri musteri;
     
     private int page = 1;
-    private int pageSize = 2;
+    private int pageSize = 4;
     private int pageCount;
     
     public void updateForm(Musteri m){

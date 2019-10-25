@@ -58,8 +58,14 @@ public class UstaAracController implements  Serializable{
         this.selectedTamir = this.ustaarac.getTamir().getTamir_id();
     }
 
+    public void update(){
+        this.getUstaaracDao().update(this.ustaarac, selectedArac, selectedUsta, selectedTamir);
+        this.clear();
+    }
+    
         public void delete(){
             this.getUstaaracDao().delete(this.ustaarac);
+            this.clear();
         }
     
     public UstaArac getUstaarac() {

@@ -15,8 +15,8 @@
             <nav class="navbar navbar-expand-lg navbar-collapse bg-dark">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
-                         <ul class="navbar-nav"> 
-                             <li class="nav-item active">
+                        <ul class="navbar-nav"> 
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
                             </li>
                             <li class="nav-item active">
@@ -25,13 +25,13 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
                             </li>     
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tur" value="Tur"/>
                             </li> 
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta" value="Usta"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="musteri" value="Musteri"/>
                             </li> 
                             <li class="nav-item">
@@ -40,22 +40,22 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="depo" value="Depo"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="kargosirketi" value="KargoSirketi"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="siparis" value="Siparis"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="parca" value="Parca"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tamir" value="Tamir"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
                             </li>
                         </ul>
@@ -64,75 +64,97 @@
             </nav>
         </div>
 
-        <div class="container">
+        <script type="text/javascript">
+            function silmeOnayla()
+            {
+                var karar = confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlemi geri alamazsınız!")
+                if (karar)
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
 
+        <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h:form>
+                    <h:form id="usta_arac-table">
                         <h:dataTable styleClass="table table-striped table-hover" value="#{ustaAracController.ustaaraclist}" var="ustaarac">
                             <h:column >
                                 <f:facet name="header"> ID </f:facet> 
-                                <h:commandLink action="#{ustaAracController.updateForm(ustaarac)}" value="#{ustaarac.usta_arac_id}" />
-                                    
-                            </h:column>
-                            
-                             <h:column >
-                                <f:facet name="header"> USTA </f:facet> 
-                                    #{ustaarac.usta.adi}
-                            </h:column>
-                            
-                           <h:column >
-                                <f:facet name="header"> ARAC </f:facet> 
-                                    #{ustaarac.arac.plaka}
-                            </h:column>
-                            
-                             <h:column >
-                                <f:facet name="header"> TAMIR </f:facet> 
-                                    #{ustaarac.tamir.tbi_ucret}
-                            </h:column>
-                          
-                             <h:column >
-                                <f:facet name="header"> TARIH </f:facet> 
-                                    #{ustaarac.tarih}
-                            </h:column>
-                            
-                        </h:dataTable>
-                    </h:form>
-                </div>
-                <div class="col-md-5">
-                    
-                    <h:form>
-                        <div class="form-group">
-                            <label for="selectUsta">Usta</label>
-                            <h:selectOneMenu styleClass="custom-select" id="selectUsta" value="#{ustaAracController.selectedUsta}">
-                                <f:selectItems value="#{ustaAracController.ustaList}" var="Usta" itemValue="#{Usta.tcno}" itemLabel="#{Usta.adi}" />
-                            </h:selectOneMenu>
-                            <label for="selectArac">Arac</label>
-                            <h:selectOneMenu styleClass="custom-select" id="selectArac" value="#{ustaAracController.selectedArac}">
-                                <f:selectItems value="#{ustaAracController.aracList}" var="Arac" itemValue="#{Arac.sasino}" itemLabel="#{Arac.plaka}" />
-                            </h:selectOneMenu>
-                            <label for="selectTamir">Tamir</label>
-                            <h:selectOneMenu styleClass="custom-select" id="selectTamir" value="#{ustaAracController.selectedTamir}">
-                                <f:selectItems value="#{ustaAracController.tamirList}" var="Tamir" itemValue="#{Tamir.tamir_id}" itemLabel="#{Tamir.tbi_ucret}" />
-                            </h:selectOneMenu>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputTarih">Tarih</label>
-                            <h:inputText value="#{ustaAracController.ustaarac.tarih}" styleClass="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <div class="btn-group">
-                                <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id == null}" action="#{ustaAracController.create}" value="Create" styleClass="btn btn-primary" />
-                                <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id != null}" action="#{ustaAracController.update}" value="Update" styleClass="btn btn-primary" />
-                                <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id != null}" action="#{ustaAracController.delete}" value="Delete" styleClass="btn btn-danger" />
-                            </div>
-                        </div>
-                    </h:form>
+                                <h:commandLink action="#{ustaAracController.updateForm(ustaarac)}" value="#{ustaarac.usta_arac_id}" >
+                                    <f:ajax execute="@this" render="usta_arac-form"/>
+                                </h:commandLink>
+                        </h:column>
 
-                </div>
+                        <h:column >
+                            <f:facet name="header"> USTA </f:facet> 
+                                #{ustaarac.usta.adi}
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header"> ARAC </f:facet> 
+                                #{ustaarac.arac.plaka}
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header"> TAMIR </f:facet> 
+                                #{ustaarac.tamir.tbi_ucret}
+                        </h:column>
+
+                        <h:column >
+                            <f:facet name="header"> TARIH </f:facet> 
+                                #{ustaarac.tarih}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
             </div>
 
+            <div class="col-md-5">
+                <h:form id="usta_arac-form">
+                    <div class="form-group">
+                        <label for="selectUsta">Usta</label>
+                        <h:selectOneMenu styleClass="custom-select" id="selectUsta" value="#{ustaAracController.selectedUsta}">
+                            <f:selectItems value="#{ustaAracController.ustaList}" var="Usta" itemValue="#{Usta.tcno}" itemLabel="#{Usta.adi}" />
+                        </h:selectOneMenu>
+                        <label for="selectArac">Arac</label>
+                        <h:selectOneMenu styleClass="custom-select" id="selectArac" value="#{ustaAracController.selectedArac}">
+                            <f:selectItems value="#{ustaAracController.aracList}" var="Arac" itemValue="#{Arac.sasino}" itemLabel="#{Arac.plaka}" />
+                        </h:selectOneMenu>
+                        <label for="selectTamir">Tamir</label>
+                        <h:selectOneMenu styleClass="custom-select" id="selectTamir" value="#{ustaAracController.selectedTamir}">
+                            <f:selectItems value="#{ustaAracController.tamirList}" var="Tamir" itemValue="#{Tamir.tamir_id}" itemLabel="#{Tamir.tbi_ucret}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTarih">Tarih</label>
+                        <h:inputText value="#{ustaAracController.ustaarac.tarih}" styleClass="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id == null}" action="#{ustaAracController.create}" value="Create" styleClass="btn btn-primary" >
+                                <f:ajax execute="usta_arac-form" render="usta_arac-form usta_arac-table" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id != null}" action="#{ustaAracController.update}" value="Update" styleClass="btn btn-primary" >
+                                <f:ajax execute="usta_arac-form" render="usta_arac-form usta_arac-table" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id != null}" action="#{ustaAracController.delete}" value="Delete" styleClass="btn btn-danger" onclick="return silmeOnayla()" >
+                                <f:ajax execute="usta_arac-form" render="usta_arac-form usta_arac-table" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{ustaAracController.ustaarac.usta_arac_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{ustaAracController.clear()}" >
+                                <f:ajax execute="usta_arac-form" render="usta_arac-form usta_arac-table" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+
+            </div>
         </div>
-    </h:body>
+
+    </div>
+</h:body>
 </html>
 

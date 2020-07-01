@@ -5,18 +5,18 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-       <h:outputStylesheet library="css" name="bootstrap.css" />
+        <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.min.js" />
         <h:outputScript library="js" name="bootstrap.js" />
 
     </h:head>
     <h:body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-collapse bg-dark">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-collapse bg-dark">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
                         <ul class="navbar-nav"> 
-                             <li class="nav-item active">
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
                             </li>
                             <li class="nav-item active">
@@ -25,13 +25,13 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
                             </li>     
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tur" value="Tur"/>
                             </li> 
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta" value="Usta"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="musteri" value="Musteri"/>
                             </li> 
                             <li class="nav-item">
@@ -40,22 +40,22 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="depo" value="Depo"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="kargosirketi" value="KargoSirketi"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="siparis" value="Siparis"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="parca" value="Parca"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tamir" value="Tamir"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
                             </li>
                         </ul>
@@ -64,32 +64,46 @@
             </nav>
         </div>
 
+        <script type="text/javascript">
+            function silmeOnayla()
+            {
+                var karar = confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlemi geri alamazsınız!")
+                if (karar)
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h:form id="firma-table">
+                    <h:form id="depo-table">
 
                         <h:dataTable styleClass="table table-striped table-hover" value="#{depoController.depolist}" var="depo">
                             <h:column>
-                                <f:facet name="header">DEPO ID</f:facet>
+                                <f:facet name="header">DEPO NO</f:facet>
                                     #{depo.depo_id}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">ADRES</f:facet>
                                 <h:commandLink action="#{depoController.updateForm(depo)}" value=" #{depo.adres}">
-                                    <f:ajax execute="@this" render="firma-form" />
+                                    <f:ajax execute="@this" render="depo-form" />
                                 </h:commandLink>
                             </h:column>
-                            
+
                         </h:dataTable>
 
                     </h:form>
                 </div>
                 <div class="col-md-6">
-                    <h:form id="firma-form">
+                    <h:form id="depo-form">
                         <div class="form-group">
-                            
-                            <label for="inputadi">Depo Id</label>
+
+                            <label for="inputadi">Depo No</label>
                             <h:inputText styleClass="form-control" value="#{depoController.depo.depo_id}" />
 
                             <label for="inputadi">Adres</label>
@@ -99,13 +113,16 @@
                         <div class="form-group">
                             <div class="form-group" >
                                 <h:commandButton rendered="#{depoController.depo.depo_id == null}" styleClass="btn btn-primary" value="Create" action="#{depoController.create}" >
-                                    <f:ajax execute="firma-form" render="firma-form firma-table" />
+                                    <f:ajax execute="depo-form" render="depo-form depo-table" />
                                 </h:commandButton>
                                 <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-primary" value="Update" action="#{depoController.update}" >
-                                    <f:ajax execute="firma-form" render="firma-form firma-table" />
+                                    <f:ajax execute="depo-form" render="depo-form depo-table" />
                                 </h:commandButton>
-                                <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-danger" value="Delete" action="#{depoController.delete()}" >
-                                    <f:ajax execute="firma-form" render="firma-form firma-table" />
+                                <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-danger" value="Delete" action="#{depoController.delete()}" onclick="return silmeOnayla();" >
+                                    <f:ajax execute="depo-form" render="depo-form depo-table" />
+                                </h:commandButton>
+                                <h:commandButton rendered="#{depoController.depo.depo_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{depoController.clear()}" >
+                                    <f:ajax execute="@this" render="depo-form" />
                                 </h:commandButton>
                             </div>
                         </div>

@@ -112,7 +112,7 @@ public class ParcaDao {
           p.setFirma(this.getFirmaDao().find(rs.getLong("firma_id")));
           p.setTur(this.getTurDao().find(rs.getLong("tur_id")));
           p.setDepo(this.getDepoDao().find(rs.getLong("depo_id")));
-          p.setSiparis(this.getSiparisDao().find(rs.getLong("sipari_id")));
+          p.setSiparis(this.getSiparisDao().find(rs.getLong("siparis_id")));
              
           
 
@@ -176,12 +176,15 @@ public class ParcaDao {
         try{ 
         
             PreparedStatement pst = this.getConnection().prepareStatement("delete from parca where parca_id=?");
-            
+            pst.setLong(1, parca.getParca_id());
+            pst.executeUpdate();
             
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }    }
+        }   
+    }
      
+    
     public FirmaDao getFirmaDao() {
         if(this.firmaDao == null)
             this.firmaDao = new FirmaDao();

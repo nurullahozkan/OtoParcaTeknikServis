@@ -54,7 +54,7 @@ public class AracController implements Serializable{
         this.getAracDao().update(this.arac, selectedMusteri);
         this.clear();
     }
-    
+  
     public Arac getArac() {
         if(this.arac == null)
             this.arac = new Arac();

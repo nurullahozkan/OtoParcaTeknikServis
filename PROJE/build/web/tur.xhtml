@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
                         <ul class="navbar-nav"> 
-                             <li class="nav-item active">
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
                             </li>
                             <li class="nav-item active">
@@ -23,13 +23,13 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
                             </li>     
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tur" value="Tur"/>
                             </li> 
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta" value="Usta"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="musteri" value="Musteri"/>
                             </li> 
                             <li class="nav-item">
@@ -38,22 +38,22 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="depo" value="Depo"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="kargosirketi" value="KargoSirketi"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="siparis" value="Siparis"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="parca" value="Parca"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tamir" value="Tamir"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
                             </li>
                         </ul>
@@ -62,16 +62,29 @@
             </nav>
         </div>
 
+        <script type="text/javascript">
+            function silmeOnayla()
+            {
+                var karar = confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlemi geri alamazsınız!")
+                if (karar)
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <h:form id="tur-table">
 
                         <h:dataTable styleClass="table table-striped table-hover" value="#{turController.turlist}" var="tur">
-                            <h:column>
-                                <f:facet name="header">TUR ID</f:facet>
-                                    #{tur.tur_id}
-                            </h:column>
+                            <!--                            <h:column>
+                                                            <f:facet name="header">TUR ID</f:facet>
+                            #{tur.tur_id}
+                    </h:column>-->
                             <h:column>
                                 <f:facet name="header">ADI</f:facet>
                                 <h:commandLink action="#{turController.updateForm(tur)}" value=" #{tur.adi}">
@@ -97,7 +110,7 @@
                                 <h:commandButton rendered="#{turController.tur.tur_id != null}" styleClass="btn btn-primary" value="Update" action="#{turController.update}" >
                                     <f:ajax execute="tur-form" render="tur-form tur-table" />
                                 </h:commandButton>
-                                <h:commandButton rendered="#{turController.tur.tur_id != null}" styleClass="btn btn-danger" value="Delete" action="#{turController.delete()}" >
+                                <h:commandButton rendered="#{turController.tur.tur_id != null}" styleClass="btn btn-danger" value="Delete" action="#{turController.delete()}" onclick="return silmeOnayla()" >
                                     <f:ajax execute="tur-form" render="tur-form tur-table" />
                                 </h:commandButton>
                                 <h:commandButton rendered="#{turController.tur.tur_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{turController.clearForm()}" >

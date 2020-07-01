@@ -42,7 +42,7 @@ public class UstaAracDao {
                 tmp.setArac(this.getAracDao().find(rs.getLong("sasino")));
                 tmp.setTamir(this.getTamirDao().find(rs.getLong("tamir_id")));
                 tmp.setTarih(rs.getString("tarih"));
-                
+
                 ustaaraclist.add(tmp);
 
             }
@@ -54,46 +54,49 @@ public class UstaAracDao {
 
         return ustaaraclist;
     }
-    
+
     public void insert(UstaArac ustaarac, Long selectedUsta, Long selectedArac, Long selectedTamir) {
-        
-        try{
-            
+
+        try {
+
             PreparedStatement pst = this.getConnection().prepareStatement("insert into usta_arac(tcno, sasino, tamir_id, tarih)"
-                    + "values (?, ?, ?, ?)" );
+                    + "values (?, ?, ?, ?)");
             pst.setLong(1, selectedUsta);
             pst.setLong(2, selectedArac);
             pst.setLong(3, selectedTamir);
             pst.setString(4, ustaarac.getTarih());
-            
+
             pst.executeUpdate();
-           
-            
-        }catch(SQLException ex){
+
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
-     public void update(UstaArac ustaarac, Long selectedArac, Long selectedUsta, Long selectedTamir) {
 
-         try{
-             
-             PreparedStatement pst = this.getConnection().prepareStatement("update ustaarac set tcno=?, tarih=?");
-     
-               }catch(SQLException ex){
+    public void update(UstaArac ustaarac, Long selectedArac, Long selectedUsta, Long selectedTamir) {
+
+        try {
+
+            PreparedStatement pst = this.getConnection().prepareStatement("update usta_arac set tarih=? where usta_arac_id=?");
+            pst.setString(1, ustaarac.getTarih());
+            pst.setLong(2, ustaarac.getUsta_arac_id());
+
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-     }
-    
-     public void delete(UstaArac ustaarac) {
-         
-         try{
-             
-             PreparedStatement pst = this.getConnection().prepareStatement("delete from usta_arac where usta_arac_id =?");
-             pst.setLong(1, ustaarac.getUsta_arac_id());
-             pst.executeUpdate();
-             
-         }catch(SQLException ex){
+    }
+
+    public void delete(UstaArac ustaarac) {
+
+        try {
+
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from usta_arac where usta_arac_id =?");
+            pst.setLong(1, ustaarac.getUsta_arac_id());
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

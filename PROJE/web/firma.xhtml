@@ -63,6 +63,20 @@
                 </div>
             </nav>
         </div>
+        
+        <script type="text/javascript">
+            function silmeOnayla()
+            {
+                var karar = confirm("Bu içeriği silmek istediğinizden eminmisiniz?\nBu işlemi geri alamazsınız!")
+                if(karar)
+                {
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        </script>
 
         <div class="container">
             <div class="row">
@@ -70,10 +84,10 @@
                     <h:form id="firma-table">
 
                         <h:dataTable styleClass="table table-striped table-hover" value="#{firmaController.firmalist}" var="firma">
-                            <h:column>
+<!--                            <h:column>
                                 <f:facet name="header">FIRMA ID</f:facet>
                                     #{firma.firma_id}
-                            </h:column>
+                            </h:column>-->
                             <h:column>
                                 <f:facet name="header">ADI</f:facet>
                                 <h:commandLink action="#{firmaController.updateForm(firma)}" value=" #{firma.adi}">
@@ -100,7 +114,7 @@
                                 <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-primary" value="Update" action="#{firmaController.update}" >
                                     <f:ajax execute="firma-form" render="firma-form firma-table" />
                                 </h:commandButton>
-                                <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-danger" value="Delete" action="#{firmaController.delete()}" >
+                                <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-danger" value="Delete" action="#{firmaController.delete()}" onclick="return silmeOnayla()" >
                                     <f:ajax execute="firma-form" render="firma-form firma-table" />
                                 </h:commandButton>
                                 <h:commandButton rendered="#{firmaController.firma.firma_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{firmaController.clearForm()}" >

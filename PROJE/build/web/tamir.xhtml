@@ -8,14 +8,13 @@
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.min.js" />
         <h:outputScript library="js" name="bootstrap.js" />
-
     </h:head>
     <h:body><div class="container">
             <nav class="navbar navbar-expand-lg navbar-collapse bg-dark">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <h:form>
-                         <ul class="navbar-nav"> 
-                             <li class="nav-item active">
+                        <ul class="navbar-nav"> 
+                            <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link " action="index" value="Ana Sayfa"/>
                             </li>
                             <li class="nav-item active">
@@ -24,13 +23,13 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="firma" value="Firma"/>
                             </li>     
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tur" value="Tur"/>
                             </li> 
-                              <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta" value="Usta"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="musteri" value="Musteri"/>
                             </li> 
                             <li class="nav-item">
@@ -39,22 +38,22 @@
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="depo" value="Depo"/>
                             </li> 
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="kargosirketi" value="KargoSirketi"/>
                             </li>
                             <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="siparis" value="Siparis"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="parca" value="Parca"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="tamir" value="Tamir"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="usta_arac" value="Usta_Arac"/>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <h:commandLink styleClass="nav-link" action="Nurullah" value="Nurullah Özkan"/>
                             </li>
                         </ul>
@@ -63,34 +62,40 @@
             </nav>
         </div>
 
-        <div class="container">
+        <script type="text/javascript">
+            function silmeOnayla()
+            {
+                var karar = confirm("Bu içeriği silmek istediğinizden emin misiniz?\nBu işlemi geri alamazsınız!")
+                if (karar)
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
 
+        <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h:form>
+                    <h:form id="tamir-table">
                         <h:dataTable styleClass="table table-striped table-hover" value="#{tamirController.tamirlist}" var="tamir">
-                            <h:column >
-                                <f:facet name="header"> TAMIR ID </f:facet> 
-                                    #{tamir.tamir_id}
-                            </h:column>
-
+                          
                             <h:column >
                                 <f:facet name="header"> PARCA ADI </f:facet> 
-                                <h:commandLink action="#{tamirController.updateForm(tamir)}" value=" #{tamir.parca.adi}" >
-                                </h:commandLink>
+                                #{tamir.parca.adi}
                             </h:column>
 
                             <h:column >
                                 <f:facet name="header"> UCRET </f:facet> 
-                                    #{tamir.tbi_ucret}
+                                #{tamir.tbi_ucret}
                             </h:column>
-
 
                         </h:dataTable>
                     </h:form>
                 </div>
                 <div class="col-md-5">
-                    <h:form>
+                    <h:form id="tamir-form">
                         <div class="form-group">
                             <label for="selectParca">Parca</label>
                             <h:selectOneMenu styleClass="custom-select" id="selectParca" value="#{tamirController.selectedParca}">
@@ -103,9 +108,18 @@
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                <h:commandButton rendered="#{tamirController.tamir.tamir_id == null}" action="#{tamirController.create}" value="Create" styleClass="btn btn-primary" />
-                                <h:commandButton rendered="#{tamirController.tamir.tamir_id != null}" action="#{tamirController.update()}" value="Update" styleClass="btn btn-primary" />
-                                <h:commandButton rendered="#{tamirController.tamir.tamir_id != null}" action="#{tamirController.delete()}" value="Delete" styleClass="btn btn-danger" />
+                                <h:commandButton rendered="#{tamirController.tamir.tamir_id == null}" action="#{tamirController.create}" value="Create" styleClass="btn btn-primary" >
+                                    <f:ajax execute="tamir-form" render="tamir-form tamir-table" />
+                                </h:commandButton>
+                                <h:commandButton rendered="#{tamirController.tamir.tamir_id != null}" action="#{tamirController.update()}" value="Update" styleClass="btn btn-primary" >
+                                    <f:ajax execute="tamir-form" render="tamir-form tamir-table" />
+                                </h:commandButton>
+                                <h:commandButton rendered="#{tamirController.tamir.tamir_id != null}" action="#{tamirController.delete()}" value="Delete" styleClass="btn btn-danger" onclick="return silmeOnayla()" >
+                                    <f:ajax execute="tamir-form" render="tamir-form tamir-table" />
+                                </h:commandButton>
+                                <h:commandButton rendered="#{tamirController.tamir.tamir_id != null}" styleClass="btn btn-dark" value="ClearForm" action="#{tamirController.clear()}" >
+                                    <f:ajax execute="tamir-form" render="tamir-form tamir-table" />
+                                </h:commandButton>
                             </div>
                         </div>
 

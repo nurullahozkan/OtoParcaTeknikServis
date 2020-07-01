@@ -10,6 +10,7 @@ import dao.TamirDao;
 import entity.Parca;
 import entity.Tamir;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -42,7 +43,7 @@ public class TamirController implements Serializable{
     
     public void updateForm(Tamir t){
         this.tamir = t;
-        this.selectedParca = this.tamir.getParca().getParca_id();
+        this.selectedParca = this.tamir.getParca().getParca_id();        
     }
     
     public void update(){
